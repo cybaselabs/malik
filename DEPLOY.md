@@ -50,3 +50,25 @@ Save, then open:
 ```text
 https://malik.murika.rw
 ```
+
+## 4. GitHub Actions deploy
+
+This repo includes `.github/workflows/deploy.yml`. It deploys every push to `main`.
+
+Add these GitHub repository secrets:
+
+```text
+SERVER_HOST=206.189.211.25
+SERVER_USER=root
+SERVER_SSH_PORT=22
+SERVER_APP_DIR=/opt/malik-site
+SERVER_SSH_KEY=<private SSH key that can log in to the server>
+```
+
+The action copies the latest site files into `SERVER_APP_DIR`, then SSHes into the server and runs:
+
+```bash
+docker compose up -d --build
+```
+
+Make sure the server user can run Docker commands. If you use a non-root user, add it to the `docker` group or update the workflow to use `sudo docker compose`.
