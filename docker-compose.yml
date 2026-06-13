@@ -1,0 +1,7 @@
+services:
+  malik-site:
+    build: .
+    container_name: malik-site
+    restart: unless-stopped
+    ports:
+      - "8088:80"
